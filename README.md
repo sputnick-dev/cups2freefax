@@ -153,8 +153,10 @@ guider… )
     #? 3
     Ok sputnick, C'est terminé. Besoin d'un tutoriel ? Voir http://redmine.sputnick-area.net/wiki/cups2freefax
 
-Configuration personnelle ( ce n’est normalement utile que pour faire des corrections )
----------------------------------------------------------------------------------------
+Configuration personnelle
+-------------------------
+
+( ce n’est normalement utile que pour faire des corrections )
 
 On gère cela via le fichier
 
@@ -187,7 +189,8 @@ On peux y paramétrer les mêmes options que dans la console web FAX de http://f
 
 A noter : le fichier de config du \$HOME outrepasse **/etc/cups2freefaxrc** si des variables y sont renseignées
 
-h2. Édition manuelle du répertoire des numéros de fax 
+Édition manuelle du répertoire des numéros de fax
+-------------------------------------------------
 
 Le répertoire peux être mis en commun dans /etc/cups2freefax/repertoire_tel_fax ou bien personnel dans~/.config/cups2freefax/repertoire_tel_fax
 
@@ -214,7 +217,8 @@ Pour voir les sources :
 
 Ou bien téléchargez le *.tar.gz, c’est la même chose.
 
-h2. Troubleshooting
+Troubleshooting
+---------------
 
 Si un problème survient, surveiller
 
