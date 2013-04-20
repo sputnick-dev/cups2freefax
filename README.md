@@ -89,7 +89,7 @@ Mageia :
 
     urpmi cups zenity urpmi perl-HTML-Tree perl-WWW-Mechanize perl-Net-SSLeay perl-LWP-Protocol-https
 
-RedHat, Centos :
+RedHat, Centos Fedora :
 
     yum install cups zenity gcc perl-HTML-Tree perl-WWW-Mechanize perl-Net-SSLeay perl-LWP-Protocol-https
 
@@ -212,7 +212,7 @@ Pour voir les sources :
     /tmp/cups2freefax_current.run --tar xf
     ls -l
 
-Ou bien téléchargez le **.tar.gz, c’est la même chose.
+Ou bien téléchargez le *.tar.gz, c’est la même chose.
 
 h2. Troubleshooting
 
