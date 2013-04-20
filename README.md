@@ -221,8 +221,7 @@ Si un problème survient, surveiller
     ~/.config/cups2freefax/log/cups2freefax.log,
     /var/log/cups/cups2freefax_log et /var/log/cups/error_log
 
-Vous pouvez aussi faire un**bug report**, une**feature request** ou une **demande de support** sur :
-https://redmine.sputnick-area.net/projects/cups2freefax/issues/new
+Vous pouvez aussi faire un **bug report**, une **feature request** ou une **demande de support** sur [ici](https://github.com/sputnick-dev/cups2freefax/issues)
 
 Enjoy ;)
 
