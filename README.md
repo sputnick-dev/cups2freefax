@@ -157,40 +157,44 @@ Configuration personnelle ( ce n’est normalement utile que pour faire des corr
 ---------------------------------------------------------------------------------------
 
 On gère cela via le fichier
-\*~/.config/cups2freefax/cups2freefaxrc\* et **/etc/cups2freefaxrc** :
+
+    ~/.config/cups2freefax/cups2freefaxrc
+
+et 
+
+    /etc/cups2freefaxrc
 
 On peux y paramétrer les mêmes options que dans la console web FAX de http://free.fr,
 
-\<pre\>
-\# Fichier d’environnement de cups2freefax sourcé par cups2freefax.bash
+    # Fichier d’environnement de cups2freefax sourcé par cups2freefax.bash
 
-\# Login et password de l’interface free
-login=xxxxxxxxx
-password=xxxxxxxx
+    # Login et password de l’interface free
+    login=xxxxxxxxx
+    password=xxxxxxxx
 
-\# Masquer le numéro appelant : 
-cups2freefax\_hide\_fax\_number=no
+    # Masquer le numéro appelant : 
+    cups2freefax_hide_fax_number=no
 
-\# Recevoir un rapport de transmission par e-mail : 
-cups2freefax\_email\_confirmation=no
+    # Recevoir un rapport de transmission par e-mail : 
+    cups2freefax_email_confirmation=no
 
-\# Durée en jours de rétention de la copie des faxs envoyés.
-\# Pour ne rien récuperer, mettre cups2freefax\_faxs\_store=0
-cups2freefax\_faxs\_store=365
+    # Durée en jours de rétention de la copie des faxs envoyés.
+    # Pour ne rien récuperer, mettre cups2freefax_faxs_store=0
+    cups2freefax_faxs_store=365
 
-\# Support de l’export DISPLAY en réseau
-\#cups2freefax\_export\_display=true
-\</pre\>
+    # Support de l’export DISPLAY en réseau
+    #cups2freefax_export_display=true
 
 A noter : le fichier de config du \$HOME outrepasse **/etc/cups2freefaxrc** si des variables y sont renseignées
 
 h2. Édition manuelle du répertoire des numéros de fax 
 
-Le répertoire peux être mis en commun dans /etc/cups2freefax/repertoire\_tel\_fax ou bien personnel dans~/.config/cups2freefax/repertoire\_tel\_fax
+Le répertoire peux être mis en commun dans /etc/cups2freefax/repertoire_tel_fax ou bien personnel dans~/.config/cups2freefax/repertoire_tel_fax
 
-    $ editor ~/.config/cups2freefax/repertoire_tel_fax</pre>
-    Utiliser cette syntaxe :
-    <pre>
+    $ editor ~/.config/cups2freefax/repertoire_tel_fax
+
+Utiliser cette syntaxe :
+
     0148765442 Pierre-Henry
     0954661277 Alex_3f
     0455669977 FakeLaule
@@ -213,11 +217,11 @@ Ou bien téléchargez le **.tar.gz, c’est la même chose.
 h2. Troubleshooting
 
 Si un problème survient, surveiller
-\~/.config/cups2freefax/log/cups2freefax.log,
-/var/log/cups/cups2freefax\_log et /var/log/cups/error\_log
 
-Vous pouvez aussi faire un**bug report**, une**feature request\* ou une
-**demande de support** sur :
+    ~/.config/cups2freefax/log/cups2freefax.log,
+    /var/log/cups/cups2freefax_log et /var/log/cups/error_log
+
+Vous pouvez aussi faire un**bug report**, une**feature request** ou une **demande de support** sur :
 https://redmine.sputnick-area.net/projects/cups2freefax/issues/new
 
 Enjoy ;)
