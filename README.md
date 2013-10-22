@@ -48,7 +48,7 @@ Features
  - gestion des faxs en CLI ou GUI ( ligne de commande ou en graphique )
 de façon automatique (nul besoin d’ouvrir un navigateur)
  - les identifiants de login sont conservés dans la configuration dés la
-première utilisation (il transite sur le web (de façon cryptée via SSL)
+première utilisation (il transite sur le web (de façon chiffré via SSL)
 pour l’interface free uniquement)
  - configuration et répertoire de fax dans /etc/cups2freefax/ qui peut
 être outre-passée avec \~/.config/cups2freefax/\*
