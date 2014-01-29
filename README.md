@@ -20,7 +20,7 @@ Captures d’écran
 Exemple graphique avec les boites de dialogues à partir du menu
 d’impression de Cups :
 
-![](http://www.sputnick-area.net/ftp/downloads/snapshot1262216241.png)
+![](http://www.sputnick.fr/ftp/downloads/snapshot1262216241.png)
 
 Menu contextuel sous KDE ( clic droit sur un fichier pdf, txt, odt… ) :
 
@@ -35,7 +35,7 @@ moins une fois via cups.*
 
 Après le choix du menu contextuel ou de Cups :
 
-![](http://www.sputnick-area.net/ftp/downloads/snapshot1262216245.png)
+![](http://www.sputnick.fr/ftp/downloads/snapshot1262216245.png)
 
 Envoi effectif du fax :
 
@@ -108,7 +108,7 @@ Ouvrir une console en tant que *user simple* ( xterm, konsole,
 gnome-terminal… ) dans une session graphique X ( Xorg ).
 
     cd /tmp
-    wget http://www.sputnick-area.net/scripts/cups2freefax/cups2freefax_current.run
+    wget http://www.sputnick.fr/scripts/cups2freefax/cups2freefax_current.run
     chmod +x cups2freefax_current.run
     sudo /tmp/cups2freefax_current.run
 
@@ -151,7 +151,7 @@ guider… )
     3) kde-Et-Gnome
     4) aucun
     #? 3
-    Ok sputnick, C'est terminé. Besoin d'un tutoriel ? Voir http://redmine.sputnick-area.net/wiki/cups2freefax
+    Ok sputnick, C'est terminé. Besoin d'un tutoriel ? Voir http://redmine.sputnick.fr/wiki/cups2freefax
 
 Configuration personnelle
 -------------------------
@@ -208,7 +208,7 @@ Sources
 Pour voir les sources :
 
     cd /tmp
-    wget http://www.sputnick-area.net/scripts/cups2freefax/cups2freefax_current.run
+    wget http://www.sputnick.fr/scripts/cups2freefax/cups2freefax_current.run
     chmod +x cups2freefax_current.run
     mkdir /tmp/sources-cups2freefax
     cd !$
