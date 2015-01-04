@@ -1,0 +1,11 @@
+[Desktop Entry]
+ServiceTypes=all/allfiles,KonqPopupMenu/Plugin
+MimeType=all/all;
+Type=Service
+Actions=fax4free
+X-KDE-Priority=TopLevel
+ 
+[Desktop Action fax4free]
+Name=fax4free
+Icon=utilities-file-archiver
+Exec=/var/lib/cups2freefax/cups2freefax.bash "%U" $USER

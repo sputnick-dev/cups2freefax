@@ -1,0 +1,20 @@
+# Fichier d'environnement de cups2freefax sourcé par cups2freefax.bash
+# Ce fichier doit respecter la syntaxe bash, à savoir clef=valeur sans espace
+# Si renseigné, il outrepassera /etc/cups2freefax/cups2freefaxrc
+
+# Login et password de l'interface free
+# login=%%LOGIN%%
+# password=%%PASSWD%%
+
+# Masquer le numéro appelant : ( yes ou no. defaut = no )
+#cups2freefax_hide_fax_number=no
+
+# Recevoir un rapport de transmission par e-mail : ( yes ou no. defaut =  no )
+#cups2freefax_email_confirmation=no
+
+# Durée en jours de rétention de la copie des faxs envoyés.
+# Pour ne rien récuperer, mettre cups2freefax_faxs_store=0
+#cups2freefax_faxs_store=365
+
+# Support de l'export DISPLAY en réseau
+#cups2freefax_export_display=true
