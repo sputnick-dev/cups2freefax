@@ -9,8 +9,7 @@ Ce projet **open-source** permet aux **Freenautes** sous **Linux**
 le site de Free via au choix : 
  - une imprimante virtuelle **CUPS**.
  - le menu contextuel de **KDE** ou **Gnome**
- - en CLI ( ligne de commande ) via le sous projet **fax4free**
-*Pour les 2 premiers de la liste, les interactions avec l’utilisateur de
+ - en CLI ( ligne de commande ) via le sous projet **fax4free**. Pour les 2 premiers de la liste, les interactions avec l’utilisateur de
 l’imprimante se passe via des **boites de dialogues graphiques**, voir
 captures ci-dessous.*
 
@@ -75,9 +74,7 @@ Les pré requis sont **cups**, **zenity**, **gcc** et les module Perl
 **WWW::Mechanize** et **Net::SSLeay**.
 
 Pour tout installer sous Debian et dérivés ( ubuntu, knoppix, kanotix,
-linspire, mepis, xandros…) en console :
-*on peux aussi utiliser **synaptic** pour les réfractaires à la ligne de
-commande*
+linspire, mepis, xandros…) en console : (on peux aussi utiliser **synaptic** pour les réfractaires à la ligne de commande)
 
     sudo apt-get update; sudo apt-get install cups zenity gcc libwww-mechanize-perl libnet-ssleay-perl
 
@@ -187,7 +184,7 @@ On peux y paramétrer les mêmes options que dans la console web FAX de http://f
     # Support de l’export DISPLAY en réseau
     #cups2freefax_export_display=true
 
-A noter : le fichier de config du \$HOME outrepasse **/etc/cups2freefaxrc** si des variables y sont renseignées
+A noter : le fichier de config du $HOME outrepasse **/etc/cups2freefaxrc** si des variables y sont renseignées
 
 Édition manuelle du répertoire des numéros de fax
 -------------------------------------------------
@@ -211,7 +208,7 @@ Pour voir les sources :
     wget http://www.sputnick.fr/scripts/cups2freefax/cups2freefax_current.run
     chmod +x cups2freefax_current.run
     mkdir /tmp/sources-cups2freefax
-    cd !$
+    cd /tmp/sources-cups2freefax
     /tmp/cups2freefax_current.run --tar xf
     ls -l
 
