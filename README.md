@@ -189,7 +189,7 @@ A noter : le fichier de config du $HOME outrepasse **/etc/cups2freefaxrc** si de
 Édition manuelle du répertoire des numéros de fax
 -------------------------------------------------
 
-Le répertoire peux être mis en commun dans /etc/cups2freefax/repertoire_tel_fax ou bien personnel dans~/.config/cups2freefax/repertoire_tel_fax
+Le répertoire peux être mis en commun dans /etc/cups2freefax/repertoire_tel_fax ou bien personnel dans ~/.config/cups2freefax/repertoire_tel_fax
 
     $ editor ~/.config/cups2freefax/repertoire_tel_fax
 
