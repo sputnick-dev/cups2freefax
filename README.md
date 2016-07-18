@@ -105,50 +105,15 @@ Ouvrir une console en tant que *user simple* ( xterm, konsole,
 gnome-terminal… ) dans une session graphique X ( Xorg ).
 
     cd /tmp
-    wget http://www.sputnick.fr/scripts/cups2freefax/cups2freefax_current.run
-    chmod +x cups2freefax_current.run
-    sudo /tmp/cups2freefax_current.run
+    git clone https://github.com/sputnick-dev/cups2freefax.git
+    cd cups2freefax/src
+    sudo ./start
 
 Si vous n’utilisez pas sudo concernant cette dernière ligne
 d’instructions, tapez :
 
     su    # taper son mot de passe "en aveugle"
-    /tmp/cups2freefax_current.run
-
-Usage avancé
-------------
-
-L’installeur gère quelques options en utilisation avancée :
-
-    # bash /tmp/cups2freefax_201004262125.run -- -h
-    Verifying archive integrity... All good.
-    Uncompressing  installation de cups2freefax ....................
-
-    Aide des options de cups2freefax :
-    ./cups2freefax_xxx.run
-    ./cups2freefax_xxx.run -f         installer uniquement le script fax4free utilisable seulement en CLI
-    ./cups2freefax_xxx.run -u         désinstallation de cups2freefax et fax4free
-    ./cups2freefax_xxx.run -d :N     N est le numéro du DISPLAY, :0 pour l'installation si non renseigné.
-    ./cups2freefax_xxx.run -h        la présente aide
-
-Message final du package d’install
-----------------------------------
-
-La sortie comportant le tutoriel en utilisation basique ( se laisser
-guider… )
-
-    # ./cups2freefax_201204040324.run 
-    Verifying archive integrity... All good.
-    Uncompressing CUPS2FREEFAX............
-    Le répertoire "/home/sputnick/.cups2freefax" a été déplacé dans "/home/sputnick/.config/cups2freefax" pour suivre les préconisations XDG.
-    Voulez vous etre mis au courant des futures versions de cups2freefax ? (N/o) >>> o
-    Voulez vous installer une nouvelle action "fax" pour le menu contextuel des navigateurs de fichiers KDE et/ou de Gnome ? (N/o) >>> o
-    1) kde
-    2) gnome
-    3) kde-Et-Gnome
-    4) aucun
-    #? 3
-    Ok sputnick, C'est terminé. Besoin d'un tutoriel ? Voir http://redmine.sputnick.fr/wiki/cups2freefax
+    ./start
 
 Configuration personnelle
 -------------------------
@@ -198,21 +163,6 @@ Utiliser cette syntaxe :
     0148765442 Pierre-Henry
     0954661277 Alex_3f
     0455669977 FakeLaule
-
-Sources
--------
-
-Pour voir les sources :
-
-    cd /tmp
-    wget http://www.sputnick.fr/scripts/cups2freefax/cups2freefax_current.run
-    chmod +x cups2freefax_current.run
-    mkdir /tmp/sources-cups2freefax
-    cd /tmp/sources-cups2freefax
-    /tmp/cups2freefax_current.run --tar xf
-    ls -l
-
-Ou bien téléchargez le *.tar.gz, c’est la même chose.
 
 Troubleshooting
 ---------------
