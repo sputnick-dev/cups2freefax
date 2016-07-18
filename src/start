@@ -14,7 +14,7 @@
 #                                               ''''
 # ------------------------------------------------------------------
 #
-# 2015-01-04 22:37:00.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2016-07-18 20:42:42.0 +0200 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -113,37 +113,33 @@ if [[ $REPLY == [yYoO]* ]]; then
 fi
 
 # Installation des différents fichiers sur le systeme :
-if ps auxw | grep &>/dev/null -E 'bin/[X]|[X]Darwin'; then
-    echo 'Voulez vous installer une nouvelle action "fax" pour le menu contextuel'
-	read -p 'des navigateurs de fichiers KDE et/ou de Gnome ? (N/o) >>> '
-	if [[ $REPLY == [yYoO]* ]]; then
-		select wm in kde gnome kde-Et-Gnome aucun; do
-			case $wm in
-				kde-Et-Gnome)
-					install -D -m 755 ./fax4free.desktop /usr/share/applications/fax4free.desktop
-					install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
-					break
-					
-				;;
-				kde)
-					install -D -m 755 ./fax4free.desktop /usr/share/applications/fax4free.desktop
-					break
-				;;
-				gnome)
-					install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
-					break
-				;;
-				*)
-					echo >&2 "Mauvais choix, re-essayer..."
-				;;
-			esac
+echo 'Voulez vous installer une nouvelle action "fax" pour le menu contextuel'
+read -p 'des navigateurs de fichiers KDE et/ou de Gnome ? (N/o) >>> '
+if [[ $REPLY == [yYoO]* ]]; then
+	select wm in kde gnome kde-Et-Gnome aucun; do
+		case $wm in
+			kde-Et-Gnome)
+				install -D -m 755 ./fax4free.desktop /usr/share/applications/fax4free.desktop
+				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
+				break
+				
+			;;
+			kde)
+				install -D -m 755 ./fax4free.desktop /usr/share/applications/fax4free.desktop
+				break
+			;;
+			gnome)
+				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
+				break
+			;;
+			*)
+				echo >&2 "Mauvais choix, re-essayer..."
+			;;
+		esac
 
-			break
-		done
+		break
+	done
 
-	fi
-else
-	echo >&2 "$0 requiert Xorg installé et lancé"
 fi
 
 install -D -m 644 ./cups2freefaxrc /var/lib/cups2freefax/cups2freefaxrc || die "pas de fichier ./cups2freefaxrc"
