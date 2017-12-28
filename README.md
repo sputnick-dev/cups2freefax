@@ -1,8 +1,6 @@
-Cups2freefax
-============
+#Cups2freefax
 
-Description
------------
+##Description
 
 Ce projet **open-source** permet aux **Freenautes** sous **Linux**
 (MacOsX ?) d’envoyer des **faxs** sans avoir a ouvrir son navigateur sur
@@ -13,8 +11,7 @@ le site de Free via au choix :
 l’imprimante se passe via des **boites de dialogues graphiques**, voir
 captures ci-dessous.*
 
-Captures d’écran
-----------------
+##Captures d’écran
 
 Exemple graphique avec les boites de dialogues à partir du menu
 d’impression de Cups :
@@ -40,8 +37,7 @@ Envoi effectif du fax :
 
 ![](http://pix.toile-libre.org/upload/original/1333509024.png)
 
-Features
---------
+##Features
 
 *Voici les principales features gérées :*
  - gestion des faxs en CLI ou GUI ( ligne de commande ou en graphique )
@@ -67,8 +63,7 @@ configurer le serveur X pour cela. (Expérimental)
 Ce projet a été testé avec succès sous Linux ( différentes distributions
 ).
 
-Prérequis packages système
---------------------------
+##Prérequis packages système
 
 Les pré requis sont **cups**, **zenity**, **gcc** et les module Perl
 **WWW::Mechanize** et **Net::SSLeay**.
@@ -98,8 +93,7 @@ Gentoo :
 
     emerge net-print/cups gnome-extra/zenity sys-devel/gcc dev-perl/WWW-Mechanize dev-perl/Net-SSLeay
 
-Install
--------
+##Install
 
 Ouvrir une console en tant que *user simple* ( xterm, konsole,
 gnome-terminal… ) dans une session graphique X ( Xorg ).
@@ -115,8 +109,7 @@ d’instructions, tapez :
     su    # taper son mot de passe "en aveugle"
     ./start
 
-Configuration personnelle
--------------------------
+##Configuration personnelle
 
 ( ce n’est normalement utile que pour faire des corrections )
 
@@ -151,8 +144,7 @@ On peux y paramétrer les mêmes options que dans la console web FAX de http://f
 
 A noter : le fichier de config du $HOME outrepasse **/etc/cups2freefaxrc** si des variables y sont renseignées
 
-Édition manuelle du répertoire des numéros de fax
--------------------------------------------------
+##Édition manuelle du répertoire des numéros de fax
 
 Le répertoire peux être mis en commun dans /etc/cups2freefax/repertoire_tel_fax ou bien personnel dans ~/.config/cups2freefax/repertoire_tel_fax
 
@@ -164,8 +156,18 @@ Utiliser cette syntaxe :
     0954661277 Alex_3f
     0455669977 FakeLaule
 
-Troubleshooting
----------------
+##Usage avancé
+
+```
+./start -h
+Aide des options de cups2freefax :
+$ sudo ./start -f       installer uniquement le script fax4free utilisable en cli
+$ sudo ./start -u       desinstallation de cups2freefax et de fax4free
+$ sudo ./start -d :n    n est le numéro du display, :0 pour l'installation si non renseigné.
+$ sudo ./start -h       la présente aide
+```
+
+##Troubleshooting
 
 Si un problème survient, surveiller
 
