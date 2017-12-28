@@ -167,11 +167,11 @@ EOF
     read -p 'Appuyez sur la touche [entrée]'
 
     echo "Merci de me donner le login de la console Free."
-    read -p "Il s'agit du numero de tel freebox >>> " login
+    read -p "Il s'agit du numero de tel freebox ou de fbx123456 >>> " login
 	sed -i "s@%%LOGIN%%@${login}@" "/etc/cups2freefax/cups2freefaxrc"
 
     echo "Merci de me donner le mot de passe de la console Free"
-    read -sp "taper en aveugle) >>> " passwd
+    read -sp "(taper en aveugle) >>> " passwd
 	sed -i "s@%%PASSWD%%@${passwd}@" "/etc/cups2freefax/cups2freefaxrc"
 fi
 
