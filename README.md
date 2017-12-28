@@ -187,5 +187,3 @@ Si un problème survient, surveiller
 Vous pouvez aussi faire un **bug report**, une **feature request** ou une **demande de support** sur [ici](https://github.com/sputnick-dev/cups2freefax/issues)
 
 Enjoy ;)
-
-++sputnick;
