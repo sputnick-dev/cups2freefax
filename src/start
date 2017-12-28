@@ -14,7 +14,7 @@
 #                                               ''''
 # ------------------------------------------------------------------
 #
-# 2016-07-18 20:42:42.0 +0200 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2017-12-28 13:32:21.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -40,7 +40,7 @@ if [[ $SUDO_USER ]]; then
 elif [[ $USER != root ]]; then
 	Suser=$USER
 else
-	echo >&2 'Impossible de determiner le user courant... Essayez de vous loguer en root via "sudo su"'
+	echo >&2 'Impossible de determiner le user courant... Essayez de vous loguer en root via "sudo -s"'
 	exit 1
 fi
 
