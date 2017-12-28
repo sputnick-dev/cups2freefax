@@ -106,12 +106,6 @@ perl -MNet::SSLeay -e1 || die "Il faut installer le module perl Net::SSLeay,\npa
 gcc -O9 -s -o cups2freefax cups2freefax.c
 [[ -s ./cups2freefax ]] || die "La compilation de cups2freefax a échouée.\nFaire un bug report si besoin sur\nhttps://github.com/sputnick-dev/cups2freefax/issues/new"
 
-echo 'Voulez vous etre mis au courant des futures versions de cups2freefax ?'
-read -p ' (N/o) >>> '
-if [[ $REPLY == [yYoO]* ]]; then
-	install -D -m644 ./version /var/lib/cups2freefax/maj
-fi
-
 # Installation des différents fichiers sur le systeme :
 echo 'Voulez vous installer une nouvelle action "fax" pour le menu contextuel'
 read -p 'des navigateurs de fichiers KDE et/ou de Gnome ? (N/o) >>> '

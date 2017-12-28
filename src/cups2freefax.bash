@@ -12,7 +12,7 @@
 #                                               ''''
 # ------------------------------------------------------------------
 #
-# 2015-01-04 22:13:09.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2017-12-28 13:22:59.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -47,14 +47,6 @@ fi
 # On crèe le fichier cups2freefaxrc si il n'est pas déjà présent
 [[ ! -s "$MYHOME/.config/cups2freefax/cups2freefaxrc" && ! -s "/etc/cups2freefax/cups2freefaxrc" ]] && install -D -m 600 /var/lib/cups2freefax/cups2freefaxrc "/etc/cups2freefax/cups2freefaxrc"
 [[ -f ${MYHOME}/.config/cups2freefax/log ]] && chmod 770 -R ${MYHOME}/.config/cups2freefax/log
-
-if [[ -e /var/lib/cups2freefax/maj ]]; then
-	LASTONE=$(wget --timeout=7 -O - http://sputnick.fr/scripts/cups2freefax/current-release -o /dev/null)
-	CURRENTVER=$(< /var/lib/cups2freefax/maj)
-	if [[ $LASTONE > $CURRENTVER ]]; then
-		zenity --info --title "cups2freefax" --text "La version $LASTONE est disponible. Voir <a href=\"http://https://github.com/sputnick-dev/cups2freefax\" >Cups2freefax</a>"
-	fi
-fi
 
 # On duplique STDOUT et STDERR pour loguer et afficher en même temps.
 touch $MYHOME/.config/cups2freefax/log/cups2freefax.log
