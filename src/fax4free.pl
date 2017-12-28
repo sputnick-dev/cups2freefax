@@ -13,7 +13,7 @@
 # ------------------------------------------------------------------
 #
 
-# 2017-12-28 12:54:17.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2017-12-28 19:07:59.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 use strict; use warnings;
 
 my $loginURL = "https://subscribe.free.fr/login/login.pl";		# URL de login console Free
@@ -116,9 +116,11 @@ $Doc2Fax =~ s!.*/!!;
 printout("Le fax $Doc2Fax a bien été envoyé vers $destinataire.\n");
 printout("vous allez recevoir une confirmation via mail.\n") if $c2ff{'cups2freefax_email_confirmation'} eq 1;
 system("
-    source /etc/profile
-    find /var/spool/cups2freefax/$USER -type f -delete &>/dev/null
-    export DISPLAY=:$DISPLAY
-    perl /var/lib/cups2freefax/cron.pl & &>/dev/null
+bash<<EOF
+source /etc/profile
+find /var/spool/cups2freefax/$USER -type f -delete &>/dev/null
+export DISPLAY=:$DISPLAY
+perl /var/lib/cups2freefax/cron.pl & &>/dev/null
+EOF
 ");
 
