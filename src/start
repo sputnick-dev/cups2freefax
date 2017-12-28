@@ -27,23 +27,6 @@ die()
 	exit $retval
 }
 
-clear
-
-# Test si on lance bien le script avec les droits requis ( root ) :
-[[ $UID == 0 ]] || \
-	die "cups2freefax requiert les droits root. Lancer \"sudo cups2freefax_current.run\"\nSi vous n'utilisez pas sudo, utilisez \"su\" pour vous logger en root."
-
-shopt -s nocasematch
-
-if [[ $SUDO_USER ]]; then
-	Suser=$SUDO_USER
-elif [[ $USER != root ]]; then
-	Suser=$USER
-else
-	echo >&2 'Impossible de determiner le user courant... Essayez de vous loguer en root via "sudo -s"'
-	exit 1
-fi
-
 while getopts "d:ufh" opt; do
 	case $opt in
 		d)
@@ -64,17 +47,31 @@ while getopts "d:ufh" opt; do
 			cat<<-EOF
 
 			Aide des options de cups2freefax :
-			./cups2freefax_xxx.run
-			./cups2freefax_xxx.run -f       installer uniquement le script fax4free utilisable en CLI
-			./cups2freefax_xxx.run -u       desinstallation de cups2freefax
-			./cups2freefax_xxx.run -d :N    N est le numéro du DISPLAY, :0 pour l'installation si non renseigné.
-			./cups2freefax_xxx.run -h       la présente aide
+			$ sudo ./start -f       installer uniquement le script fax4free utilisable en cli
+			$ sudo ./start -u       desinstallation de cups2freefax et de fax4free
+			$ sudo ./start -d :n    n est le numéro du display, :0 pour l'installation si non renseigné.
+			$ ./start -h       la présente aide
 			EOF
 
 			exit 1
 		;;
 	esac
 done
+
+# Test si on lance bien le script avec les droits requis ( root ) :
+[[ $UID == 0 ]] || \
+	die "cups2freefax requiert les droits root. Lancer \"sudo cups2freefax_current.run\"\nSi vous n'utilisez pas sudo, utilisez \"su\" pour vous logger en root."
+
+shopt -s nocasematch
+
+if [[ $SUDO_USER ]]; then
+	Suser=$SUDO_USER
+elif [[ $USER != root ]]; then
+	Suser=$USER
+else
+	echo >&2 'Impossible de determiner le user courant... Essayez de vous loguer en root via "sudo -s"'
+	exit 1
+fi
 
 # vieille versions avant feature #38
 if [[ -e /etc/cups2freefaxrc ]]; then
