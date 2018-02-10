@@ -76,11 +76,12 @@ Les pré requis sont **cups**, **zenity**, **gcc** et les module Perl
 Pour tout installer sous Debian et dérivés ( ubuntu, knoppix, kanotix,
 linspire, mepis, xandros…) en console : (on peux aussi utiliser **synaptic** pour les réfractaires à la ligne de commande)
 
-    sudo apt-get update; sudo apt-get install cups zenity gcc libwww-mechanize-perl libnet-ssleay-perl
+    sudo apt-get update
+    sudo apt-get install cups zenity gcc libwww-mechanize-perl libxml-xpath-perl libnet-ssleay-perl liblwp-protocol-https-perl
 
-Archlinux :
+Archlinux/Manjaro :
 
-    pacman -Sy cups zenity gcc perl-www-mechanize perl-net-ssleay
+    pacman -Sy cups zenity gcc perl-www-mechanize perl-net-ssleay perl-xml-xpath perl-lwp-protocol-https
 
 Mageia :
 
