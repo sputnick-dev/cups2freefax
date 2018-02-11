@@ -14,7 +14,7 @@
 #                                               ''''
 # ------------------------------------------------------------------
 #
-# 2017-12-28 13:40:10.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-02-11 03:23:46.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -185,7 +185,7 @@ Erreur lors de la création de l'imprimante virtuelle CUPS2FREEFAX.
 Merci d'ouvrir un bug report si vous avez bien CUPS installé, avec 
 le nom de votre distribution ainsi que sa version
 et la version de cups2freefax et toute erreur visible :
-http://redmine.sputnick-area.net/projects/cups2freefax/issues/new
+https://github.com/sputnick-dev/cups2freefax/issues/new
 EOF
     exit 1
 fi
