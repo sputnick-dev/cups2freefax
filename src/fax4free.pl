@@ -13,7 +13,7 @@
 # ------------------------------------------------------------------
 #
 
-# 2017-12-28 19:07:59.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-02 21:06:54.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 use strict; use warnings;
 
 my $loginURL = "https://subscribe.free.fr/login/login.pl";		# URL de login console Free
@@ -101,7 +101,7 @@ $m->submit_form( fields => {
 my $authreply = $m->content( format => 'text' );
 printdie("Authentification erronée\n") if $authreply =~ /Identifiant ou mot de passe incorrect/i;
 $m->follow_link( url_regex => qr/menu\.pl.*?telephonie/i );
-$m->follow_link( url_regex => qr/tel_fax\.pl/i );
+$m->follow_link( url_regex => qr/phone_fax\.pl/i );
 $m->submit_form( fields => {
 		masque 			=> 	$c2ff{'cups2freefax_hide_fax_number'},
 		destinataire 	=> 	$destinataire,
