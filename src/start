@@ -7,7 +7,7 @@
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
 #
-# 2018-03-03 15:18:14.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 18:12:36.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -92,14 +92,16 @@ gcc -O9 -s -o cups2freefax cups2freefax.c
 [[ -s ./cups2freefax ]] || die "La compilation de cups2freefax a échouée.\nFaire un bug report si besoin sur\nhttps://github.com/sputnick-dev/cups2freefax/issues/new"
 
 # Installation des différents fichiers sur le systeme :
-echo 'Voulez vous installer une nouvelle action "fax" pour le menu contextuel'
-read -p 'des navigateurs de fichiers KDE et/ou de Gnome ? (N/o) >>> '
+echo 'Voulez vous installer une nouvelle action "fax" pour le menu contextuel '
+read -p 'des navigateurs de fichiers KDE et/ou de Gnome, xfce ? (N/o) >>> '
 if [[ $REPLY == [yYoO]* ]]; then
-	select wm in kde gnome kde-Et-Gnome aucun; do
+	select wm in kde gnome kde-Et-Gnome xfce aucun; do
 		case $wm in
 			kde-Et-Gnome)
 				install -D -m 755 ./fax4free.desktop /usr/share/applications/fax4free.desktop
 				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
+                ln -sf /usr/share/nautilus-scripts/fax4free /home/$LOGNAME/.gnome2/nautilus-scripts/fax4free
+                chown -h ${LOGNAME}: ~/.gnome2/nautilus-scripts/fax4free
 				break
 				
 			;;
@@ -109,8 +111,13 @@ if [[ $REPLY == [yYoO]* ]]; then
 			;;
 			gnome)
 				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
+                ln -sf /usr/share/nautilus-scripts/fax4free /home/$LOGNAME/.gnome2/nautilus-scripts/fax4free
+                chown -h ${LOGNAME}: ~/.gnome2/nautilus-scripts/fax4free
 				break
 			;;
+            xfce)
+                install -D -m 755 ./fax4free_xfce /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop
+            ;;
 			*)
 				echo >&2 "Mauvais choix, re-essayer..."
 			;;
