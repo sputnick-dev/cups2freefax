@@ -7,7 +7,7 @@
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
 #
-# 2018-03-03 18:52:29.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 19:33:30.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -23,7 +23,7 @@ die()
 while getopts "d:ufh" opt; do
 	case $opt in
 		u)
-			rm -rf /var/lib/cups2freefax /usr/{lib/cups/backend/cups2freefax,bin/fax4free,share/{applications/fax4free.desktop,nautilus-scripts/fax4free}} /home/$Suser/.gnome2/nautilus-scripts/fax4free
+			rm -rf /var/lib/cups2freefax /usr/{lib/cups/backend/cups2freefax,bin/fax4free,share/{applications/fax4free.desktop,nautilus-scripts/fax4free}} /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop /home/$Suser/.gnome2/nautilus-scripts/fax4free
 			read -p "La partie systeme a été effacée, il ne reste que votre répertoire personnel cups2freefax et /etc/cups2freefax. Purger ? (o/N) >>> " cups2freefaxQuestion
 			[[ $cups2freefaxQuestion == [oOyY]* ]] && rm -rf /home/$Suser/.config/cups2freefax /etc/cups2freefax
 			exit 0
