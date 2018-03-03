@@ -9,7 +9,7 @@
 
 # Partie récupération des documenst envoyés
 
-# 2018-03-03 15:17:43.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 18:10:32.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 my $loginURL = "https://subscribe.free.fr/login/login.pl";		# URL de login console Free
 my $temporisation = 3;  										# secondes d'attente entre chaque essai de téléchargement des archives
@@ -91,7 +91,7 @@ printdie("Authentification erronée\n") if $authreply =~ /Identifiant ou mot de 
 $m->follow_link( url_regex => qr/menu\.pl.*?telephonie/i );
 $m->follow_link( url_regex => qr/phone_fax\.pl/i );
 
-@newUrl = $m->find_all_links( url_regex => qr/tel_dlfax\.pl\?id=\w+\&idt=\w+\&fichier=.*\&msg=\w+&type=tx/ );
+@newUrl = $m->find_all_links( url_regex => qr/phone_fax\.pl\?action=dl\&id=\w+\&idt=\w+\&fichier=.*\&msg=\w+&type=tx/ );
 
 foreach my $urls (@newUrl) {
     $url = $urls->url_abs;
