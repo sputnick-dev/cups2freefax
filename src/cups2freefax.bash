@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-03 15:18:30.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 18:00:19.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -96,5 +96,5 @@ set +x
 chown -R ${CURRENT_USER}: $MYHOME/.config/cups2freefax
 
 if [[ $cups2freefax_faxs_store != 0 && $cups2freefax_faxs_store =~ [0-9]+ ]]; then
-	find $MYHOME/.config/cups2freefax/envoyes -mtime +$cups2freefax_faxs_store -exec \rm {} \;
+	find $MYHOME/.config/cups2freefax/envoyes -type f -mtime +$cups2freefax_faxs_store -exec \rm {} \;
 fi
