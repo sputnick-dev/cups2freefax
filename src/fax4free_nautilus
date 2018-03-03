@@ -1,20 +1,12 @@
 #!/usr/bin/env bash
 #
 # ------------------------------------------------------------------
-#    made by sputnick in da FreAkY lAb (c) 2009-2015
-#    gilles.quenot <AT> gmail <DOT> com
-#
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
-#                                       ,,_
-#                                      o"  )@
-#                                       ''''
-# ------------------------------------------------------------------
-#
-# 2015-01-04 22:14:20.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 15:19:01.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # vim:ts=4:sw=4
 

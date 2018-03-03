@@ -1,18 +1,10 @@
 #!/bin/bash
 # ------------------------------------------------------------------
-#    made by sputnick in da FreAkY lApPy lAb (c) 2009-2015
-#    gilles.quenot <AT> gmail <DOT> com
-#
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-#                                               ,,_
-#                                              o"  )@
-#                                               ''''
-# ------------------------------------------------------------------
-#
-# 2017-12-28 13:22:59.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 15:18:30.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax

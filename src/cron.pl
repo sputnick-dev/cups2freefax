@@ -1,21 +1,15 @@
 #!/usr/bin/env perl
 # ------------------------------------------------------------------
-#    made by sputnick in da FreAkY lAb (c) 2009-2015
-#    gilles.quenot <AT> gmail <DOT> com
+#    gilles.quenot <AT> sputnick <DOT> fr
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-#                                                ,,_
-#                                               o"  )@
-#                                                ''''
-# ------------------------------------------------------------------
-#
 
 # Partie récupération des documenst envoyés
 
-# 2018-03-02 21:11:18.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 15:17:43.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 my $loginURL = "https://subscribe.free.fr/login/login.pl";		# URL de login console Free
 my $temporisation = 3;  										# secondes d'attente entre chaque essai de téléchargement des archives

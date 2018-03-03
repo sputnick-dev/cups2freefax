@@ -1,15 +1,8 @@
 /*
    ------------------------------------------------------------------
-      made by sputnick in da FreAkY lAb (c) 2009-2015
-      gilles.quenot <AT> gmail <DOT> com
-  
       This program is free software; you can redistribute it and/or
       modify it under the terms of version 2 of the GNU General Public
       License published by the Free Software Foundation.
-   ------------------------------------------------------------------
-									 ,,_
-									o"  )@
-									 ''''
    ------------------------------------------------------------------
 
    cups2freefax is a fork of cups-pdf backend :
