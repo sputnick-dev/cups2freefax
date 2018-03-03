@@ -7,7 +7,7 @@
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
 #
-# 2018-03-03 18:12:36.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-03 18:52:29.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -186,5 +186,5 @@ EOF
 fi
 cupsenable CUPS2FREEFAX
 cupsaccept CUPS2FREEFAX
-echo "Ok $USER, C'est terminé."
+echo "Ok ${LOGNAME}, C'est terminé."
 
