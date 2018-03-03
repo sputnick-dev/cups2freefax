@@ -13,28 +13,13 @@
 
 CURRENT_PDF="$(readlink -f "${1:?}")"
 CURRENT_USER="${2:?}"
-MYHOME=$(eval "readlink -f ~${CURRENT_USER}")                                                                                                                             
+MYHOME=$(eval "readlink -f /home/${CURRENT_USER}")                                                                                                                             
 REPERTOIREFAX1="$MYHOME/.config/cups2freefax/repertoire_tel_fax"
 REPERTOIREFAX2="/etc/cups2freefax/repertoire_tel_fax"
 
 mkdir -p $MYHOME/.config/cups2freefax/log
 
-# Export DISPLAY (experimental)
-eval $(grep 2>/dev/null '^cups2freefax_export_display=' "/etc/cups2freefax/cups2freefaxrc" "$MYHOME/.config/cups2freefax/cups2freefaxrc")
-REMOTEIP=$(ps auxww | perl -ne 'do{print $&,$/;exit} if /[j]ob-originating-host-name=\K\d+\.\d+\.\d+\.\d+/;')
-
-if [[ $cups2freefax_export_display == true && $REMOTEIP ]]; then
-	export DISPLAY=${REMOTEIP}:0
-else
-	export DISPLAY=:0
-	export XAUTHORITY="$MYHOME/.Xauthority"
-fi
-
-if [[ -s /usr/share/nautilus-scripts/fax4free ]]; then
-	mkdir -p $MYHOME/.gnome2/nautilus-scripts
-	ln -sf /usr/share/nautilus-scripts/fax4free $MYHOME/.gnome2/nautilus-scripts/fax4free
-	chown -h ${CURRENT_USER}: ~/.gnome2/nautilus-scripts/fax4free
-fi
+export DISPLAY=:0
 
 # On crèe le fichier cups2freefaxrc si il n'est pas déjà présent
 [[ ! -s "$MYHOME/.config/cups2freefax/cups2freefaxrc" && ! -s "/etc/cups2freefax/cups2freefaxrc" ]] && install -D -m 600 /var/lib/cups2freefax/cups2freefaxrc "/etc/cups2freefax/cups2freefaxrc"

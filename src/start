@@ -22,10 +22,6 @@ die()
 
 while getopts "d:ufh" opt; do
 	case $opt in
-		d)
-            echo "L'option -d est experimentale..."
-			OwnedDISPLAY=$opt
-		;;
 		u)
 			rm -rf /var/lib/cups2freefax /usr/{lib/cups/backend/cups2freefax,bin/fax4free,share/{applications/fax4free.desktop,nautilus-scripts/fax4free}} /home/$Suser/.gnome2/nautilus-scripts/fax4free
 			read -p "La partie systeme a été effacée, il ne reste que votre répertoire personnel cups2freefax et /etc/cups2freefax. Purger ? (o/N) >>> " cups2freefaxQuestion
@@ -42,7 +38,6 @@ while getopts "d:ufh" opt; do
 			Aide des options de cups2freefax :
 			$ sudo ./start -f       installer uniquement le script fax4free utilisable en cli
 			$ sudo ./start -u       desinstallation de cups2freefax et de fax4free
-			$ sudo ./start -d :n    n est le numéro du display, :0 pour l'installation si non renseigné.
 			$ ./start -h       la présente aide
 			EOF
 

@@ -61,8 +61,6 @@ après au moins une utilisation de cups2freefax)
  - vérification optionnelle des nouvelles versions de cups2freefax
  - configuration de l’imprimante virtuelle automatique (quand vous
 voulez imprimer, vous aurez une nouvelle imprimante CUPS2FREEFAX)
- - gestion de l’impression en réseau via export DISPLAY, nécessite de
-configurer le serveur X pour cela. (Expérimental)
 
 Ce projet a été testé avec succès sous Linux ( différentes distributions
 ).
@@ -147,8 +145,6 @@ On peux y paramétrer les mêmes options que dans la console web FAX de http://f
     # Pour ne rien récuperer, mettre cups2freefax_faxs_store=0
     cups2freefax_faxs_store=365
 
-    # Support de l’export DISPLAY en réseau
-    #cups2freefax_export_display=true
 
 A noter : le fichier de config du $HOME outrepasse **/etc/cups2freefaxrc** si des variables y sont renseignées
 
