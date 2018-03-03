@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=cups2freefax
+GenericName=cups2freefax
+Exec=/var/lib/cups2freefax/cups2freefax.bash "%F" $USER
+# vi:set encoding=UTF-8:
