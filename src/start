@@ -7,7 +7,7 @@
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
 #
-# 2018-03-03 19:33:30.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-05 17:19:59.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -23,9 +23,9 @@ die()
 while getopts "d:ufh" opt; do
 	case $opt in
 		u)
-			rm -rf /var/lib/cups2freefax /usr/{lib/cups/backend/cups2freefax,bin/fax4free,share/{applications/fax4free.desktop,nautilus-scripts/fax4free}} /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop /home/$Suser/.gnome2/nautilus-scripts/fax4free
+			rm -rf /var/lib/cups2freefax /usr/{lib/cups/backend/cups2freefax,bin/fax4free,share/{applications/fax4free.desktop,nautilus-scripts/fax4free}} /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop /home/$user/.gnome2/nautilus-scripts/fax4free
 			read -p "La partie systeme a été effacée, il ne reste que votre répertoire personnel cups2freefax et /etc/cups2freefax. Purger ? (o/N) >>> " cups2freefaxQuestion
-			[[ $cups2freefaxQuestion == [oOyY]* ]] && rm -rf /home/$Suser/.config/cups2freefax /etc/cups2freefax
+			[[ $cups2freefaxQuestion == [oOyY]* ]] && rm -rf /home/$user/.config/cups2freefax /etc/cups2freefax
 			exit 0
 		;;
 		f)
@@ -53,9 +53,11 @@ done
 shopt -s nocasematch
 
 if [[ $SUDO_USER ]]; then
-	Suser=$SUDO_USER
+	user=$SUDO_USER
 elif [[ $USER != root ]]; then
-	Suser=$USER
+	user=$USER
+elif [[ $LOGNAME != root ]]; then
+	user=$USER
 else
 	echo >&2 'Impossible de determiner le user courant... Essayez de vous loguer en root via "sudo -s"'
 	exit 1
@@ -66,10 +68,10 @@ if [[ -e /etc/cups2freefaxrc ]]; then
     mkdir -p /etc/cups2freefax
     mv /etc/cups2freefaxrc /etc/cups2freefax/cups2freefaxrc
 fi
-if [[ -d /home/$Suser/.cups2freefax && ! -d /home/$Suser/.config/cups2freefax ]]; then
-    mv "/home/$Suser/.cups2freefax" "/home/$Suser/.config/cups2freefax" &&
-        echo -e "Le répertoire \"/home/$Suser/.cups2freefax\" a été déplacé\
-        \ndans \"/home/$Suser/.config/cups2freefax\" pour suivre les préconisations XDG." 
+if [[ -d /home/$user/.cups2freefax && ! -d /home/$user/.config/cups2freefax ]]; then
+    mv "/home/$user/.cups2freefax" "/home/$user/.config/cups2freefax" &&
+        echo -e "Le répertoire \"/home/$user/.cups2freefax\" a été déplacé\
+        \ndans \"/home/$user/.config/cups2freefax\" pour suivre les préconisations XDG." 
 fi
 
 # Test si cups est installé :
@@ -93,37 +95,31 @@ gcc -O9 -s -o cups2freefax cups2freefax.c
 
 # Installation des différents fichiers sur le systeme :
 echo 'Voulez vous installer une nouvelle action "fax" pour le menu contextuel '
-read -p 'des navigateurs de fichiers KDE et/ou de Gnome, xfce ? (N/o) >>> '
+read -p 'des navigateurs de fichiers KDE, Gnome ou xfce ? (N/o) >>> '
 if [[ $REPLY == [yYoO]* ]]; then
-	select wm in kde gnome kde-Et-Gnome xfce aucun; do
+	select wm in kde4 kde5 gnome xfce QUITTER; do
 		case $wm in
-			kde-Et-Gnome)
-				install -D -m 755 ./fax4free.desktop /usr/share/applications/fax4free.desktop
-				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
-                ln -sf /usr/share/nautilus-scripts/fax4free /home/$LOGNAME/.gnome2/nautilus-scripts/fax4free
-                chown -h ${LOGNAME}: ~/.gnome2/nautilus-scripts/fax4free
-				break
-				
+			kde4)
+				install -D -m 644 ./fax4free.desktop /usr/share/applications/fax4free.desktop
 			;;
-			kde)
-				install -D -m 755 ./fax4free.desktop /usr/share/applications/fax4free.desktop
-				break
+			kde5)
+				install -D -m 644 ./fax4free.desktop /usr/share/kservices5/ServiceMenus/fax4free.desktop
 			;;
 			gnome)
 				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
-                ln -sf /usr/share/nautilus-scripts/fax4free /home/$LOGNAME/.gnome2/nautilus-scripts/fax4free
-                chown -h ${LOGNAME}: ~/.gnome2/nautilus-scripts/fax4free
-				break
+                ln -sf /usr/share/nautilus-scripts/fax4free /home/$user/.gnome2/nautilus-scripts/fax4free
+                chown ${user}: /home/$user/.gnome2/nautilus-scripts/fax4free
 			;;
             xfce)
                 install -D -m 755 ./fax4free_xfce /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop
+            ;;
+            QUITTER)
+                break
             ;;
 			*)
 				echo >&2 "Mauvais choix, re-essayer..."
 			;;
 		esac
-
-		break
 	done
 
 fi
@@ -142,7 +138,7 @@ chmod 755 /etc/cups2freefax
 chmod 644 /etc/cups2freefax/*
 # On renseigne /etc/cups2freefax/cups2freefaxrc si non deja présent sur le système
 . /etc/cups2freefax/cups2freefaxrc
-[[ -e /home/$Suser/.config/cups2freefax/cups2freefaxrc ]] && . /home/$Suser/.config/cups2freefax/cups2freefaxrc 
+[[ -e /home/$user/.config/cups2freefax/cups2freefaxrc ]] && . /home/$user/.config/cups2freefax/cups2freefaxrc 
 
 if [[ $login == "%%LOGIN%%" ]]; then
 	cat<<EOF
@@ -152,7 +148,7 @@ manuellement en naviguant sur http://subscribe.free.fr/login/login.pl
 ils ne vous seront plus demandés.
 
 Vous pouvez aussi bypasser /etc/cups2freefax/cups2freefaxrc en utilisant
-/home/$Suser/.config/cups2freefax/cups2freefaxrc
+/home/$user/.config/cups2freefax/cups2freefaxrc
 
 EOF
 
@@ -186,5 +182,5 @@ EOF
 fi
 cupsenable CUPS2FREEFAX
 cupsaccept CUPS2FREEFAX
-echo "Ok ${LOGNAME}, C'est terminé."
+echo "Ok ${user}, C'est terminé."
 
