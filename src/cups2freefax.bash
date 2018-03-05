@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-05 18:44:34.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-05 19:30:13.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -92,7 +92,6 @@ fi
 set -x
 [[ ${NUM} && "${CURRENT_PDF}" ]] && HOME=$MYHOME /usr/bin/fax4free -d ${NUM} -f "${CURRENT_PDF}"
 set +x
-\rm -vf "${CURRENT_PDF}"
 
 chown -R ${CURRENT_USER}: $MYHOME/.config/cups2freefax
 
