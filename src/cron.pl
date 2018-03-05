@@ -1,15 +1,12 @@
 #!/usr/bin/env perl
 # ------------------------------------------------------------------
-#    gilles.quenot <AT> sputnick <DOT> fr
-#
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
+# 2018-03-05 17:37:31.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 # Partie récupération des documenst envoyés
-
-# 2018-03-03 18:10:32.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 my $loginURL = "https://subscribe.free.fr/login/login.pl";		# URL de login console Free
 my $temporisation = 3;  										# secondes d'attente entre chaque essai de téléchargement des archives
@@ -20,43 +17,15 @@ binmode(STDOUT, ":utf8");
 binmode(STDERR, ":utf8");
 binmode(STDIN,  ":utf8");
 use IO::Handle; *STDOUT->autoflush(); *STDERR->autoflush();
-use Env qw/HOME DISPLAY/;
+use Env qw/HOME/;
 use WWW::Mechanize;
 
-$| = 1;
 my ($message, $num, $currentMsgId, $currentFichier, $currentFichierNew, @newUrl, @docArr, @arrPresent, %h);
 my $dieMessage = $0 . "requiert que le fichier ~/.config/cups2freefax/cups2freefaxrc ou /etc/cups2freefax/cups2freefaxrc soit renseigné avec les logins et password de l'interface Free.";
 my $BDD = "$HOME/.config/cups2freefax/docs.db";
 my $url = "placeholder";
 
-# Si on est en interactif, on est donc en CLI.
-# Si c'est bien le cas, on affiche sur la sortie standard,
-# sinon via zenity.
-use constant IS_TERMINAL => -t STDIN;
-
-sub printdie {
-	if (IS_TERMINAL) {
-		print STDERR "@_\n";
-		exit(1);
-	}
-	else {
-        $message = "@_";
-		`DISPLAY=$DISPLAY zenity --error --title fax4free --text "$message"`;
-		exit(1);
-	}
-}
-
-sub printout {
-	if (IS_TERMINAL) {
-		print "@_\n";
-	}
-	else {
-        $message = "@_";
-        `DISPLAY=$DISPLAY echo "message:$message" | zenity --notification --listen 2>/dev/null`;
-	}
-}
-
-printdie("$dieMessage\n") unless -s "$HOME/.config/cups2freefax/cups2freefaxrc" || -s "/etc/cups2freefax/cups2freefaxrc";
+die("$dieMessage\n") unless -s "$HOME/.config/cups2freefax/cups2freefaxrc" || -s "/etc/cups2freefax/cups2freefaxrc";
 my @arr = `cat /etc/cups2freefax/cups2freefaxrc $HOME/.config/cups2freefax/cups2freefaxrc`;
 my (%c2ff, $a, $b);
 for (@arr) {
@@ -69,7 +38,7 @@ for (@arr) {
 
 exit(0) if $c2ff{'cups2freefax_faxs_store'} == 0;
 
-printdie($dieMessage) unless $c2ff{'password'} && $c2ff{'login'};
+die($dieMessage) unless $c2ff{'password'} && $c2ff{'login'};
 
 $c2ff{'cups2freefax_hide_fax_number'} = 'Y' if $c2ff{'cups2freefax_hide_fax_number'} eq 'yes';
 $c2ff{'cups2freefax_hide_fax_number'} = 'off' if $c2ff{'cups2freefax_hide_fax_number'} eq 'no';
@@ -87,7 +56,7 @@ $m->submit_form( fields => {
 	}
 );
 my $authreply = $m->content( format => 'text' );
-printdie("Authentification erronée\n") if $authreply =~ /Identifiant ou mot de passe incorrect/i;
+die("Authentification erronée\n") if $authreply =~ /Identifiant ou mot de passe incorrect/i;
 $m->follow_link( url_regex => qr/menu\.pl.*?telephonie/i );
 $m->follow_link( url_regex => qr/phone_fax\.pl/i );
 
@@ -121,7 +90,7 @@ foreach my $urls (@newUrl) {
 
     # Ecriture BDD
     if (defined($h{$currentMsgId})) {
-         printout("$currentFichier déjà récupéré");
+        #printout("$currentFichier déjà récupéré");
      }
      else {
         # Si le fichier existe déjà, on incremente
@@ -142,14 +111,14 @@ foreach my $urls (@newUrl) {
             $currentFichierNew = $currentFichier;
         }
         $m->get( $url, ':content_file' => "$HOME/.config/cups2freefax/envoyes/$currentFichierNew" )
-            or printdie("Il n'a pas été possible de récupérer $currentFichier dans l'interface web de Free...\n");
+            or die("Il n'a pas été possible de récupérer $currentFichier dans l'interface web de Free...\n");
 
         open my $writeHandle, ">>", $BDD or die "$0: $BDD: [$!]\n";
         print $writeHandle "$currentMsgId $currentFichier\n";
         close($writeHandle);
 
         if (-s "$HOME/.config/cups2freefax/envoyes/$currentFichierNew") {
-            printout("$currentFichier récupéré\n");
+            # printout("$currentFichier récupéré\n");
         }
 
         sleep($temporisation);
