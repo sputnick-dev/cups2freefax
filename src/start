@@ -7,7 +7,7 @@
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
 #
-# 2018-03-05 17:19:59.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-06 22:50:02.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -130,8 +130,13 @@ install -D -m 755 ./cups2freefax.bash /var/lib/cups2freefax/cups2freefax.bash ||
 install -D -m 644 ./cups2freefax.conf /etc/cups/cups2freefax.conf || die "pas de fichier ./cups2freefax.conf"
 if [[ ! -s /etc/cups2freefax/cups2freefaxrc ]]; then install -D -m 644 ./etc_cups2freefaxrc /etc/cups2freefax/cups2freefaxrc || die "pas de fichier ./etc_cups2freefaxrc"; fi
 install -D -m 755 ./fax4free.pl /usr/bin/fax4free || die "pas de fichier ./fax4free.pl"
+
+# fix #10 
+\rm /etc/cron.daily/cups2freefax.pl # old place
 install -D -m 755 ./cron.pl /var/lib/cups2freefax/cron.pl || die "pas de fichier ./cron.pl"
-install -D -m755 ./cron.pl /etc/cron.daily/cups2freefax.pl &>/dev/null # si pas de cron, ça marche quand même, mais c'est plus sur - en cas -
+sed -i "s/%%USER%%/$user/" ./cron || die "pas de fichier ./cron"
+install -D -m 644 ./cron /etc/cron.d/daily_cups2freefax # new place as user
+
 chmod 755 /var/lib/cups2freefax/cups2freefax.bash
 chown root: /usr/lib/cups/backend/cups2freefax /var/lib/cups2freefax/cups2freefax.bash* /etc/cups/cups2freefax.conf
 chmod 755 /etc/cups2freefax

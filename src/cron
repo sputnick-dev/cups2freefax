@@ -1,0 +1,6 @@
+# Run the cups2freefax job
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=%%USER%%
+01 * * * * %%USER%% /var/lib/cups2freefax/cron.pl
+
