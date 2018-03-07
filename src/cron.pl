@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-05 17:37:31.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-07 23:17:34.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 # Partie récupération des documenst envoyés
 
@@ -26,7 +26,7 @@ my $BDD = "$HOME/.config/cups2freefax/docs.db";
 my $url = "placeholder";
 
 die("$dieMessage\n") unless -s "$HOME/.config/cups2freefax/cups2freefaxrc" || -s "/etc/cups2freefax/cups2freefaxrc";
-my @arr = `cat /etc/cups2freefax/cups2freefaxrc $HOME/.config/cups2freefax/cups2freefaxrc`;
+my @arr = `cat /etc/cups2freefax/cups2freefaxrc $HOME/.config/cups2freefax/cups2freefaxrc 2>/dev/null`;
 my (%c2ff, $a, $b);
 for (@arr) {
     if (/=/ and !/(^#|^$)/) {
