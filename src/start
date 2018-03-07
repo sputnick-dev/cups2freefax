@@ -7,7 +7,7 @@
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
 #
-# 2018-03-06 22:50:02.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-07 23:26:47.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -132,7 +132,7 @@ if [[ ! -s /etc/cups2freefax/cups2freefaxrc ]]; then install -D -m 644 ./etc_cup
 install -D -m 755 ./fax4free.pl /usr/bin/fax4free || die "pas de fichier ./fax4free.pl"
 
 # fix #10 
-\rm /etc/cron.daily/cups2freefax.pl # old place
+\rm /etc/cron.daily/cups2freefax.pl &>/dev/null # old place
 install -D -m 755 ./cron.pl /var/lib/cups2freefax/cron.pl || die "pas de fichier ./cron.pl"
 sed -i "s/%%USER%%/$user/" ./cron || die "pas de fichier ./cron"
 install -D -m 644 ./cron /etc/cron.d/daily_cups2freefax # new place as user
