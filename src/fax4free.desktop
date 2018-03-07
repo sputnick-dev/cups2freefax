@@ -2,7 +2,7 @@
 ServiceTypes=all/allfiles,KonqPopupMenu/Plugin
 MimeType=all/all;
 Type=Service
-Actions=fax4free
+Actions=cups2freefax
 X-KDE-Priority=TopLevel
  
 [Desktop Action fax4free]
