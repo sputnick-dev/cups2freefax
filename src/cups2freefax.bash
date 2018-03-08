@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-08 00:52:12.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-08 19:48:33.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -19,9 +19,6 @@ REPERTOIREFAX2="/etc/cups2freefax/repertoire_tel_fax"
 
 mkdir -p $MYHOME/.config/cups2freefax/log
 
-export DISPLAY=:0
-export XAUTHORITY=$MYHOME/.Xauthority
-
 # On crèe le fichier cups2freefaxrc si il n'est pas déjà présent
 [[ ! -s "$MYHOME/.config/cups2freefax/cups2freefaxrc" && ! -s "/etc/cups2freefax/cups2freefaxrc" ]] && install -D -m 600 /var/lib/cups2freefax/cups2freefaxrc "/etc/cups2freefax/cups2freefaxrc"
 [[ -f ${MYHOME}/.config/cups2freefax/log ]] && chmod 770 -R ${MYHOME}/.config/cups2freefax/log
@@ -30,6 +27,19 @@ export XAUTHORITY=$MYHOME/.Xauthority
 touch $MYHOME/.config/cups2freefax/log/cups2freefax.log
 chmod 600 $MYHOME/.config/cups2freefax/log/cups2freefax.log
 exec &> >(tee $MYHOME/.config/cups2freefax/log/cups2freefax.log)
+
+[[ $DISPLAY ]] || export DISPLAY=:0
+
+if [[ -s $MYHOME/.Xauthority ]]; then
+    export XAUTHORITY=$MYHOME/.Xauthority
+else
+    xa=$(compgen -W /tmp/xauth-*)
+    if [[ -s $xa ]]; then
+        export XAUTHORITY=$xa
+    else
+        echo >&2 "ERROR no XAUTHORITY found !"
+    fi
+fi
 # On laisse quelques traces pour nourrir le log.
 date
 echo "On traite ${CURRENT_PDF} pour ${CURRENT_USER}..."
