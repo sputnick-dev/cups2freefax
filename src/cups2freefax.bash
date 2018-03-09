@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-08 19:48:33.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-09 06:09:04.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -28,18 +28,23 @@ touch $MYHOME/.config/cups2freefax/log/cups2freefax.log
 chmod 600 $MYHOME/.config/cups2freefax/log/cups2freefax.log
 exec &> >(tee $MYHOME/.config/cups2freefax/log/cups2freefax.log)
 
-[[ $DISPLAY ]] || export DISPLAY=:0
+# https://unix.stackexchange.com/questions/429092
+export DISPLAY=$(
+    ps -u $(id -u) -o pid= |
+      xargs -I{} cat /proc/{}/environ 2>/dev/null |
+      tr '\0' '\n' |
+      grep -m1 '^DISPLAY=:.*$'
+)
 
-if [[ -s $MYHOME/.Xauthority ]]; then
-    export XAUTHORITY=$MYHOME/.Xauthority
-else
-    xa=$(compgen -W /tmp/xauth-*)
-    if [[ -s $xa ]]; then
-        export XAUTHORITY=$xa
-    else
-        echo >&2 "ERROR no XAUTHORITY found !"
-    fi
-fi
+export XAUTHORITY=$(
+    ps -u $(id -u) -o pid= |
+      xargs -I{} cat /proc/{}/environ 2>/dev/null |
+      tr '\0' '\n' |
+      grep -m1 '^XAUTHORITY='
+)
+
+[[ $DISPLAY && $XAUTHORITY ]] || die "Impossible de detected XAUTHORITY et DISPLAY, merci de creer un bug report"
+
 # On laisse quelques traces pour nourrir le log.
 date
 echo "On traite ${CURRENT_PDF} pour ${CURRENT_USER}..."
