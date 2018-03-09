@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-09 06:09:04.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-09 06:25:37.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -33,7 +33,7 @@ export DISPLAY=$(
     ps -u $(id -u) -o pid= |
       xargs -I{} cat /proc/{}/environ 2>/dev/null |
       tr '\0' '\n' |
-      grep -m1 '^DISPLAY=:.*$'
+      grep -m1 '^DISPLAY='
 )
 
 export XAUTHORITY=$(
