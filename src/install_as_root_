@@ -1,0 +1,4 @@
+whoami
+. /tmp/cups2freefax.source
+echo $DISPLAY
+echo $XAUTHORITY

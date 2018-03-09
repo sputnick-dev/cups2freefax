@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-08 19:48:33.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-08 23:10:24.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -28,18 +28,17 @@ touch $MYHOME/.config/cups2freefax/log/cups2freefax.log
 chmod 600 $MYHOME/.config/cups2freefax/log/cups2freefax.log
 exec &> >(tee $MYHOME/.config/cups2freefax/log/cups2freefax.log)
 
-[[ $DISPLAY ]] || export DISPLAY=:0
+# si besoin de detecter automatiquement le DISPLAY, essayer:
+# strings /proc/$(pidof Xorg)/environ | grep -Eo 'DISPLAY=:[0-9]+(:[0-9])*'
+[[ $DISPLAY ]] || display=$(printf '%s\n' $(ps uww $(pidof Xorg)) | grep -o '^:[0-9]\+\(:[0-9]\)*\s*$')
 
-if [[ -s $MYHOME/.Xauthority ]]; then
-    export XAUTHORITY=$MYHOME/.Xauthority
+if [[ $display == :* ]]; then
+    export DISPLAY=$display
 else
-    xa=$(compgen -W /tmp/xauth-*)
-    if [[ -s $xa ]]; then
-        export XAUTHORITY=$xa
-    else
-        echo >&2 "ERROR no XAUTHORITY found !"
-    fi
+    echo >&2 "ERROR no DISPLAY found !"
 fi
+
+
 # On laisse quelques traces pour nourrir le log.
 date
 echo "On traite ${CURRENT_PDF} pour ${CURRENT_USER}..."

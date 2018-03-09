@@ -1,0 +1,191 @@
+#!/usr/bin/env bash
+#
+# ------------------------------------------------------------------
+#    This program is free software; you can redistribute it and/or
+#    modify it under the terms of version 2 of the GNU General Public
+#    License published by the Free Software Foundation.
+#       (see http://www.gnu.org/licenses/gpl.html).
+# ------------------------------------------------------------------
+#
+# 2018-03-07 23:26:47.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+#
+# Script d'installation de cups2freefax
+#
+# vim:ts=4:sw=4
+
+die()
+{
+	retval=$?
+	echo >&2 -e "FAX4FREE erreur : $1"
+	exit $retval
+}
+
+while getopts "d:ufh" opt; do
+	case $opt in
+		u)
+			rm -rf /var/lib/cups2freefax /usr/{lib/cups/backend/cups2freefax,bin/fax4free,share/{applications/fax4free.desktop,nautilus-scripts/fax4free}} /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop /home/$user/.gnome2/nautilus-scripts/fax4free
+			read -p "La partie systeme a été effacée, il ne reste que votre répertoire personnel cups2freefax et /etc/cups2freefax. Purger ? (o/N) >>> " cups2freefaxQuestion
+			[[ $cups2freefaxQuestion == [oOyY]* ]] && rm -rf /home/$user/.config/cups2freefax /etc/cups2freefax
+			exit 0
+		;;
+		f)
+			install -D -m 755 ./fax4free.pl /usr/bin/fax4free || die "pas de fichier ./fax4free.pl"
+			exit 0
+		;;
+		*)
+			cat<<-EOF
+
+			Aide des options de cups2freefax :
+			$ sudo ./start -f       installer uniquement le script fax4free utilisable en cli
+			$ sudo ./start -u       desinstallation de cups2freefax et de fax4free
+			$ ./start -h       la présente aide
+			EOF
+
+			exit 1
+		;;
+	esac
+done
+
+# Test si on lance bien le script avec les droits requis ( root ) :
+[[ $UID == 0 ]] || \
+	die "cups2freefax requiert les droits root. Lancer \"sudo cups2freefax_current.run\"\nSi vous n'utilisez pas sudo, utilisez \"su\" pour vous logger en root."
+
+shopt -s nocasematch
+
+if [[ $SUDO_USER ]]; then
+	user=$SUDO_USER
+elif [[ $USER != root ]]; then
+	user=$USER
+elif [[ $LOGNAME != root ]]; then
+	user=$USER
+else
+	echo >&2 'Impossible de determiner le user courant... Essayez de vous loguer en root via "sudo -s"'
+	exit 1
+fi
+
+# vieille versions avant feature #38
+if [[ -e /etc/cups2freefaxrc ]]; then
+    mkdir -p /etc/cups2freefax
+    mv /etc/cups2freefaxrc /etc/cups2freefax/cups2freefaxrc
+fi
+if [[ -d /home/$user/.cups2freefax && ! -d /home/$user/.config/cups2freefax ]]; then
+    mv "/home/$user/.cups2freefax" "/home/$user/.config/cups2freefax" &&
+        echo -e "Le répertoire \"/home/$user/.cups2freefax\" a été déplacé\
+        \ndans \"/home/$user/.config/cups2freefax\" pour suivre les préconisations XDG." 
+fi
+
+# Test si cups est installé :
+[[ -s /etc/cups/cupsd.conf ]] || die "Cups ne semble pas installé, on quitte..."
+
+# Test présence zenity :
+type &>/dev/null zenity || die "Il faut installer zenity, on quitte"
+
+# Test présence GCC pour compiler le backend cups2freefax :
+type &>/dev/null gcc || die "Il faut installer gcc\n( il peux etre desinstallé après installation de cups2freefax ),\npaquet gcc sous debian et dérivés"
+
+# Test présence module perl pour l'envoi du fax :
+perl -MWWW::Mechanize -e1 || \
+	die "Il faut installer le module perl WWW::Mechanize,\npaquet libwww-mechanize-perl sous Debian et dérivés,\nsinon \"cpan -i WWW::Mechanize\""
+
+perl -MNet::SSLeay -e1 || die "Il faut installer le module perl Net::SSLeay,\npaquet \"libnet-ssleay-perl\" sous Debian et dérivés"
+
+# Compilation et installation du backend :
+gcc -O9 -s -o cups2freefax cups2freefax.c
+[[ -s ./cups2freefax ]] || die "La compilation de cups2freefax a échouée.\nFaire un bug report si besoin sur\nhttps://github.com/sputnick-dev/cups2freefax/issues/new"
+
+# Installation des différents fichiers sur le systeme :
+echo 'Voulez vous installer une nouvelle action "fax" pour le menu contextuel '
+read -p 'des navigateurs de fichiers KDE, Gnome ou xfce ? (N/o) >>> '
+if [[ $REPLY == [yYoO]* ]]; then
+	select wm in kde4 kde5 gnome xfce QUITTER; do
+		case $wm in
+			kde4)
+				install -D -m 644 ./fax4free.desktop /usr/share/applications/fax4free.desktop
+			;;
+			kde5)
+				install -D -m 644 ./fax4free.desktop /usr/share/kservices5/ServiceMenus/fax4free.desktop
+			;;
+			gnome)
+				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
+                ln -sf /usr/share/nautilus-scripts/fax4free /home/$user/.gnome2/nautilus-scripts/fax4free
+                chown ${user}: /home/$user/.gnome2/nautilus-scripts/fax4free
+			;;
+            xfce)
+                install -D -m 755 ./fax4free_xfce /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop
+            ;;
+            QUITTER)
+                break
+            ;;
+			*)
+				echo >&2 "Mauvais choix, re-essayer..."
+			;;
+		esac
+	done
+
+fi
+
+install -D -m 644 ./cups2freefaxrc /var/lib/cups2freefax/cups2freefaxrc || die "pas de fichier ./cups2freefaxrc"
+install -D -m 700 ./cups2freefax /usr/lib/cups/backend/cups2freefax || die "pas de binaire ./cups2freefax"
+install -D -m 755 ./cups2freefax.bash /var/lib/cups2freefax/cups2freefax.bash || die "pas de fichier ./cups2freefax.bash"
+install -D -m 644 ./cups2freefax.conf /etc/cups/cups2freefax.conf || die "pas de fichier ./cups2freefax.conf"
+if [[ ! -s /etc/cups2freefax/cups2freefaxrc ]]; then install -D -m 644 ./etc_cups2freefaxrc /etc/cups2freefax/cups2freefaxrc || die "pas de fichier ./etc_cups2freefaxrc"; fi
+install -D -m 755 ./fax4free.pl /usr/bin/fax4free || die "pas de fichier ./fax4free.pl"
+
+# fix #10 
+\rm /etc/cron.daily/cups2freefax.pl &>/dev/null # old place
+install -D -m 755 ./cron.pl /var/lib/cups2freefax/cron.pl || die "pas de fichier ./cron.pl"
+sed -i "s/%%USER%%/$user/" ./cron || die "pas de fichier ./cron"
+install -D -m 644 ./cron /etc/cron.d/daily_cups2freefax # new place as user
+
+chmod 755 /var/lib/cups2freefax/cups2freefax.bash
+chown root: /usr/lib/cups/backend/cups2freefax /var/lib/cups2freefax/cups2freefax.bash* /etc/cups/cups2freefax.conf
+chmod 755 /etc/cups2freefax
+chmod 644 /etc/cups2freefax/*
+# On renseigne /etc/cups2freefax/cups2freefaxrc si non deja présent sur le système
+. /etc/cups2freefax/cups2freefaxrc
+[[ -e /home/$user/.config/cups2freefax/cups2freefaxrc ]] && . /home/$user/.config/cups2freefax/cups2freefaxrc 
+
+if [[ $login == "%%LOGIN%%" ]]; then
+	cat<<EOF
+Les 2 questions suivantes permettent de configurer
+/etc/cups2freefax/cups2freefaxrc avec les access free que vous utiliseriez
+manuellement en naviguant sur http://subscribe.free.fr/login/login.pl
+ils ne vous seront plus demandés.
+
+Vous pouvez aussi bypasser /etc/cups2freefax/cups2freefaxrc en utilisant
+/home/$user/.config/cups2freefax/cups2freefaxrc
+
+EOF
+
+    read -p 'Appuyez sur la touche [entrée]'
+
+    echo "Merci de me donner le login de la console Free."
+    read -p "Il s'agit du numero de tel freebox ou de fbx123456 >>> " login
+	sed -i "s@%%LOGIN%%@${login}@" "/etc/cups2freefax/cups2freefaxrc"
+
+    echo "Merci de me donner le mot de passe de la console Free"
+    read -sp "(taper en aveugle) >>> " passwd
+	sed -i "s@%%PASSWD%%@${passwd}@" "/etc/cups2freefax/cups2freefaxrc"
+fi
+
+# feature #31
+if ! ps -ef | grep &>/dev/null '[c]upsd'; then
+    echo >&2 "Cups doit etre démarré pour installer cups2freefax"
+    exit 1
+fi
+lpadmin -x CUPS2FREEFAX &>/dev/null
+install -D -m 644 ./CUPS2FREEFAX.ppd /etc/cups/ppd/CUPS2FREEFAX.ppd || die "pas de fichier ./CUPS2FREEFAX.ppd"
+if ! lpadmin -p CUPS2FREEFAX -v "cups2freefax:/" -P "/etc/cups/ppd/CUPS2FREEFAX.ppd"; then
+    cat<<EOF >&2
+Erreur lors de la création de l'imprimante virtuelle CUPS2FREEFAX.
+Merci d'ouvrir un bug report si vous avez bien CUPS installé, avec 
+le nom de votre distribution ainsi que sa version
+et la version de cups2freefax et toute erreur visible :
+https://github.com/sputnick-dev/cups2freefax/issues/new
+EOF
+    exit 1
+fi
+cupsenable CUPS2FREEFAX
+cupsaccept CUPS2FREEFAX
+echo "Ok ${user}, C'est terminé."
+
