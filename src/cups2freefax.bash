@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-10 20:33:20.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-10 20:46:28.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -36,12 +36,17 @@ export DISPLAY=$(
       grep -m1 '^DISPLAY='
 )
 
-export XAUTHORITY=$(
-    ps -u $(id -u) -o pid= |
-      xargs -I{} cat /proc/{}/environ 2>/dev/null |
-      tr '\0' '\n' |
-      grep -m1 '^XAUTHORITY='
-)
+xa=$(compgen -W /tmp/xauth-$(id -u)*)
+if [[ -s $xa ]]; then
+    XAUTHORITY=$xa
+else
+    export XAUTHORITY=$(
+        ps -u $(id -u) -o pid= |
+          xargs -I{} cat /proc/{}/environ 2>/dev/null |
+          tr '\0' '\n' |
+          grep -m1 '^XAUTHORITY='
+    )
+fi
 
 if [[ $DISPLAY != :[0-9]* ]]; then
     echo >&2 "Impossible de detected DISPLAY, merci de creer un bug report"
