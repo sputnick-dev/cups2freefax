@@ -8,7 +8,7 @@ Ce projet **open-source** permet aux **Freenautes** sous **Linux**
 (MacOsX ?) d’envoyer des **faxs** sans avoir a ouvrir son navigateur sur
 le site de Free via au choix : 
  - une imprimante virtuelle **CUPS**.
- - le menu contextuel de **KDE** ou **Gnome**
+ - le menu contextuel de **KDE** **xfce** ou **Gnome**
  - en CLI ( ligne de commande ) via le sous projet **fax4free**. Pour les 2 premiers de la liste, les interactions avec l’utilisateur de
 l’imprimante se passe via des **boites de dialogues graphiques**, voir
 captures ci-dessous.*
@@ -28,7 +28,7 @@ Menu contextuel sous KDE ( clic droit sur un fichier pdf, txt, odt… ) :
 Menu contextuel sous Gnome ( clic droit sur un fichier pdf, txt, odt… )
 :
 *A noter que ce menu n’apparaît qu’après avoir lancé cups2freefax au
-moins une fois via cups.*
+moins une fois via cups et redémarré la session X.*
 
 ![](http://omploader.org/vNGFqbQ)
 
@@ -55,7 +55,7 @@ pour l’interface free uniquement)
 le destinataire, option de confirmation par mail ) et plus : 
  récupération des faxs (via le script et en cron journalier) tels que
 reçus par le destinataire avec durée paramétrable de 0 à l’infini
- - envoi par menu contextuel pour KDE et/ou Gnome (accessible seulement
+ - envoi par menu contextuel pour KDE xfce ou Gnome (accessible seulement
 après au moins une utilisation de cups2freefax)
  - répertoire téléphonique des numéros de faxs
  - vérification optionnelle des nouvelles versions de cups2freefax
