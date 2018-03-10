@@ -51,7 +51,7 @@ if [[ $DISPLAY != :[0-9]* ]]; then
 fi
 
 if [[ ! -s $XAUTHORITY ]]; then
-    echo >&2 "Impossible de detected XAUTHORITY"
+    echo >&2 "Impossible de detecter XAUTHORITY"
 fi
 
 # On laisse quelques traces pour nourrir le log.
