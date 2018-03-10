@@ -107,13 +107,21 @@ if [[ $REPLY == [yYoO]* ]]; then
 			;;
 			gnome)
 				install -D -m 755 ./fax4free_nautilus /usr/share/nautilus-scripts/fax4free
+                mkdir -p /home/$user/.gnome2/nautilus-scripts
                 ln -sf /usr/share/nautilus-scripts/fax4free /home/$user/.gnome2/nautilus-scripts/fax4free
                 chown ${user}: /home/$user/.gnome2/nautilus-scripts/fax4free
 			;;
             xfce)
+                x=$(compgen -W /home/$user/.local/share/applications/*cups2freefax*.desktop)
+                if [[ -s $x ]]; then
+                    \rm -f /home/$user/.local/share/applications/*cups2freefax*.desktop
+                fi
                 install -D -m 755 ./fax4free_xfce /usr/share/Thunar/sendto/thunar-sendto-cups2freefax.desktop
             ;;
             QUITTER)
+                echo "Il faut lancer au moins une fois cups2freefax avec ctrl+p"
+                echo "sur une page web on un document et redemarrer la session X"
+                echo "pour prendre en compte les changements."
                 break
             ;;
 			*)
