@@ -8,4 +8,5 @@ X-KDE-Priority=TopLevel
 [Desktop Action fax4free]
 Name=fax4free
 Icon=utilities-file-archiver
-Exec=/var/lib/cups2freefax/cups2freefax.bash "%U" $USER
+Exec=/var/lib/cups2freefax/cups2freefax.bash "%U"
+

@@ -6,10 +6,10 @@
 #    License published by the Free Software Foundation.
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
-# 2018-03-03 15:19:01.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-10 22:42:40.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # vim:ts=4:sw=4
 
 for i in $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS; do
-	/var/lib/cups2freefax/cups2freefax.bash "$i" $USER
+    /var/lib/cups2freefax/cups2freefax.bash "$i"
 done

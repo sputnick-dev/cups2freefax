@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-10 21:02:23.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-10 22:44:01.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -12,7 +12,7 @@
 . /etc/profile
 
 CURRENT_PDF="$(readlink -f "${1:?}")"
-CURRENT_USER="${2:?}"
+CURRENT_USER=$(whoami)
 MYHOME="/home/${CURRENT_USER}"
 REPERTOIREFAX1="$MYHOME/.config/cups2freefax/repertoire_tel_fax"
 REPERTOIREFAX2="/etc/cups2freefax/repertoire_tel_fax"
