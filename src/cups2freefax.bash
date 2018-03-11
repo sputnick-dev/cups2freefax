@@ -4,7 +4,7 @@
 #    modify it under the terms of version 2 of the GNU General Public
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
-# 2018-03-10 22:44:01.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-11 16:46:07.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 
 
 # Doc, bug reports, wiki : https://github.com/sputnick-dev/cups2freefax
@@ -114,7 +114,11 @@ if [[ $NUM == ' ' || ( ! -s $REPERTOIREFAX1 && ! -s $REPERTOIREFAX2 ) ]]; then
 fi
 
 set -x
-[[ ${NUM} && "${CURRENT_PDF}" ]] && HOME=$MYHOME /usr/bin/fax4free -d ${NUM} -f "${CURRENT_PDF}"
+if [[ ${NUM} && "${CURRENT_PDF}" ]]; then
+    export USER=$CURRENT_USER
+    export HOME=$MYHOME
+    /usr/bin/fax4free -d ${NUM} -f "${CURRENT_PDF}"
+fi
 set +x
 
 chown -R ${CURRENT_USER}: $MYHOME/.config/cups2freefax

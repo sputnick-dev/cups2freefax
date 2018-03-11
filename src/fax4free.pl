@@ -7,7 +7,7 @@
 #    License published by the Free Software Foundation.
 # ------------------------------------------------------------------
 
-# 2018-03-03 15:17:08.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-11 17:25:05.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 use strict; use warnings;
 
 my $loginURL = "https://subscribe.free.fr/login/login.pl";		# URL de login console Free
@@ -106,15 +106,9 @@ $m->submit_form( fields => {
 my $overflowreply = $m->content( format => 'text' );
 printdie("Quota depassé : Vous envoyez trop de fax\n") if $overflowreply =~ m/Vous envoyez trop de fax/i ;
 
+unlink $Doc2Fax;
 $Doc2Fax =~ s!.*/!!;
 printout("Le fax $Doc2Fax a bien été envoyé vers $destinataire.\n");
 printout("vous allez recevoir une confirmation via mail.\n") if $c2ff{'cups2freefax_email_confirmation'} eq 1;
-system("
-bash<<EOF
-source /etc/profile
-find /var/spool/cups2freefax/$USER -type f -delete &>/dev/null
-export DISPLAY=:$DISPLAY
-perl /var/lib/cups2freefax/cron.pl & &>/dev/null
-EOF
-");
+system("/var/lib/cups2freefax/cron.pl & &>/dev/null");
 
