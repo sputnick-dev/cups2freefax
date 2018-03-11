@@ -7,7 +7,7 @@
 #       (see http://www.gnu.org/licenses/gpl.html).
 # ------------------------------------------------------------------
 #
-# 2018-03-11 00:13:43.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
+# 2018-03-11 02:22:01.0 +0100 / Gilles Quenot <gilles.quenot@sputnick.fr>
 #
 # Script d'installation de cups2freefax
 #
@@ -38,7 +38,7 @@ while getopts "d:ufh" opt; do
 			Aide des options de cups2freefax :
 			$ sudo ./start -f       installer uniquement le script fax4free utilisable en cli
 			$ sudo ./start -u       desinstallation de cups2freefax et de fax4free
-			$ ./start -h       la présente aide
+			$ ./start -h			la présente aide
 			EOF
 
 			exit 1

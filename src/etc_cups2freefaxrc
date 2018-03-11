@@ -1,5 +1,5 @@
 # Fichier d'environnement de cups2freefax sourcé par cups2freefax.bash
-# Ce fichier doit respecter la syntace bash, à savoir clef=valeur sans espace
+# Ce fichier doit respecter la syntaxe bash, à savoir clef=valeur sans espace
 # On peut outrepasser ce fichier dans son home en modifiant ~/.config/cups2freefax/cups2freefaxrc
 
 # Login et password de l'interface free
