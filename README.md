@@ -19,26 +19,23 @@ Captures d’écran
 Exemple graphique avec les boites de dialogues à partir du menu
 d’impression de Cups :
 
-![](http://www.sputnick.fr/ftp/downloads/snapshot1262216241.png)
+![](http://sputnick.fr/downloads/snapshot1262216241.png)
 
-Menu contextuel sous KDE ( clic droit sur un fichier pdf, txt, odt… ) :
 
-![](http://img63.imageshack.us/img63/9335/fax4free.png)
-
-Menu contextuel sous Gnome ( clic droit sur un fichier pdf, txt, odt… )
+Menu contextuel avec XFCE ( clic droit sur un fichier pdf, txt, odt… )
 :
 *A noter que ce menu n’apparaît qu’après avoir lancé cups2freefax au
 moins une fois via cups et redémarré la session X.*
 
-![](http://omploader.org/vNGFqbQ)
+![](http://sputnick.fr/downloads/capture_20180806002.png)
 
 Après le choix du menu contextuel ou de Cups :
 
-![](http://www.sputnick.fr/ftp/downloads/snapshot1262216245.png)
+![](http://sputnick.fr/downloads/capture_20180806001.png)
 
 Envoi effectif du fax :
 
-![](http://pix.toile-libre.org/upload/original/1333509024.png)
+![](http://sputnick.fr/downloads/1333509024.png)
 
 Features
 --------
