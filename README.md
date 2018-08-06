@@ -27,7 +27,7 @@ Menu contextuel avec XFCE ( clic droit sur un fichier pdf, txt, odt… )
 *A noter que ce menu n’apparaît qu’après avoir lancé cups2freefax au
 moins une fois via cups et redémarré la session X.*
 
-![](http://sputnick.fr/downloads/capture_20180806002.png)
+![](http://sputnick.fr/downloads/capture_20180806003.png)
 
 Après le choix du menu contextuel ou de Cups :
 
