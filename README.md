@@ -19,7 +19,7 @@ Captures d’écran
 Exemple graphique avec les boites de dialogues à partir du menu
 d’impression de Cups :
 
-![](http://sputnick.fr/downloads/snapshot1262216241.png)
+![](https://sputnick.fr/downloads/snapshot1262216241.png)
 
 
 Menu contextuel avec XFCE ( clic droit sur un fichier pdf, txt, odt… )
@@ -27,15 +27,15 @@ Menu contextuel avec XFCE ( clic droit sur un fichier pdf, txt, odt… )
 *A noter que ce menu n’apparaît qu’après avoir lancé cups2freefax au
 moins une fois via cups et redémarré la session X.*
 
-![](http://sputnick.fr/downloads/capture_20180806003.png)
+![](https://sputnick.fr/downloads/capture_20180806003.png)
 
 Après le choix du menu contextuel ou de Cups :
 
-![](http://sputnick.fr/downloads/capture_20180806001.png)
+![](https://sputnick.fr/downloads/capture_20180806001.png)
 
 Envoi effectif du fax :
 
-![](http://sputnick.fr/downloads/1333509024.png)
+![](https://sputnick.fr/downloads/1333509024.png)
 
 Features
 --------
