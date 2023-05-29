@@ -1,4 +1,4 @@
-Obsolète, voir https://www.phonandroid.com/free-met-fin-au-service-fax-de-la-freebox-des-novembre-2022.html
+## Obsolète, voir https://www.phonandroid.com/free-met-fin-au-service-fax-de-la-freebox-des-novembre-2022.html
 
 Cups2freefax
 ============
