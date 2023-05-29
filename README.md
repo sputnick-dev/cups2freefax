@@ -1,10 +1,12 @@
+Obsolète, voir https://www.phonandroid.com/free-met-fin-au-service-fax-de-la-freebox-des-novembre-2022.html
+
 Cups2freefax
 ============
 
 Description
 -----------
 
-Ce projet **open-source** permet aux **Freenautes** sous **Linux**
+Ce projet **open-source** permetait aux **Freenautes** sous **Linux**
 (MacOsX ?) d’envoyer des **faxs** sans avoir a ouvrir son navigateur sur
 le site de Free via au choix : 
  - une imprimante virtuelle **CUPS**.
